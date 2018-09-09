@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Google Cloud Platform SSH 连接配置 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#Google Cloud Platform SSH 连接配置 ##首先  创建实例后设置当前用户的新密码$ sudo passwd ${whoami} // 下面以 user 代替 ${whoami}输入新密码 随便设置下 root 的新密码$ sudo passwd root##输入新密码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Cloud Platform SSH 连接配置">
+<meta property="og:url" content="http://yoursite.com/2018/05/26/ssh/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="#Google Cloud Platform SSH 连接配置 ##首先  创建实例后设置当前用户的新密码$ sudo passwd ${whoami} // 下面以 user 代替 ${whoami}输入新密码 随便设置下 root 的新密码$ sudo passwd root##输入新密码">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-26T14:59:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google Cloud Platform SSH 连接配置">
+<meta name="twitter:description" content="#Google Cloud Platform SSH 连接配置 ##首先  创建实例后设置当前用户的新密码$ sudo passwd ${whoami} // 下面以 user 代替 ${whoami}输入新密码 随便设置下 root 的新密码$ sudo passwd root##输入新密码">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ssh" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/26/ssh/" class="article-date">
+  <time datetime="2018-05-26T00:00:00.000Z" itemprop="datePublished">2018-05-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT相关/">IT相关</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Google Cloud Platform SSH 连接配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Google Cloud Platform SSH 连接配置</p>
+<p>##首先</p>
+<ol>
+<li>创建实例后设置当前用户的新密码<br><code>$ sudo passwd ${whoami} // 下面以 user 代替 ${whoami}</code><h2 id="输入新密码"><a href="#输入新密码" class="headerlink" title="输入新密码"></a>输入新密码</h2></li>
+<li>随便设置下 root 的新密码<br>$ sudo passwd root<br>##输入新密码</li>
+</ol>
+<a id="more"></a>
+<p>##在本地生成私钥和公钥<br><code>$ cd ~/.ssh
+$ ssh-keygen -f myKey
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): (给 private key 设置一个密码，避免私钥被人盗用的风险)
+Enter same passphrase again: (再次输入上次相同密码)
+Your identification has been saved in myKey.
+Your public key has been saved in myKey.pub.
+The key fingerprint is:
+SHA256:EW7ow1wCKAh1rM/GG08ZAwOy+7+SUiT0rFXY2f8mNvk user@computer-name.local
+The key&#39;s randomart image is:
++---[RSA 2048]----+
+|=.o+= o .        |
+|o+.o+= + .       |
+|o.o..oo *        |
+|..o+ +o+ o       |
+|.oo+  =+S o      |
+| o. * o. = o     |
+| ..o =  . =      |
+|. o.. .    E     |
+| . .o.           |
++----[SHA256]-----+</code></p>
+<h2 id="此时会生成-公钥-myKey-pub-和-私钥-myKey"><a href="#此时会生成-公钥-myKey-pub-和-私钥-myKey" class="headerlink" title="此时会生成 公钥 myKey.pub 和 私钥 myKey"></a>此时会生成 公钥 myKey.pub 和 私钥 myKey</h2><p>##复制公钥<br>$ cat myKey.pub<br>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCjHKPaeglRVJzAhNq+W<br>…<br>dKx8sJ0Rw4kUqm2eU2vo8S5IEA0Nk2f7BtVGE8VOCHgmDbv2tLp9845UVp1 <a href="mailto:user@computer-name.local" target="_blank" rel="noopener">user@computer-name.local</a></p>
+<h2 id="把这长长的一段复制下来，把其中的-user-computer-name-local-改为你在浏览器-SSH-登入之后的当前用户名"><a href="#把这长长的一段复制下来，把其中的-user-computer-name-local-改为你在浏览器-SSH-登入之后的当前用户名" class="headerlink" title="把这长长的一段复制下来，把其中的 user@computer-name.local 改为你在浏览器 SSH 登入之后的当前用户名"></a>把这长长的一段复制下来，把其中的 <a href="mailto:user@computer-name.local" target="_blank" rel="noopener">user@computer-name.local</a> 改为你在浏览器 SSH 登入之后的当前用户名</h2><p>##导入公钥</p>
+<h2 id="进入谷歌云平台页面-gt-计算引擎-gt-元数据-gt-SSH-密钥，粘贴保存"><a href="#进入谷歌云平台页面-gt-计算引擎-gt-元数据-gt-SSH-密钥，粘贴保存" class="headerlink" title="进入谷歌云平台页面 -&gt; 计算引擎 -&gt; 元数据 -&gt; SSH 密钥，粘贴保存"></a>进入谷歌云平台页面 -&gt; 计算引擎 -&gt; 元数据 -&gt; SSH 密钥，粘贴保存</h2><h2 id="谷歌就会把上面这段-public-key-写入到-ssh-authorized-keys"><a href="#谷歌就会把上面这段-public-key-写入到-ssh-authorized-keys" class="headerlink" title="谷歌就会把上面这段 public key 写入到 ~/.ssh/authorized_keys"></a>谷歌就会把上面这段 public key 写入到 ~/.ssh/authorized_keys</h2><p>本地通过私钥登录<br>$ ssh -i myKey <a href="mailto:user@35.189.175.199" target="_blank" rel="noopener">user@35.189.175.199</a><br>Enter passphrase for key ‘myKey’: (输入 private key 密码)<br>Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.11.2-041102-generic x86_64)</p>
+<ul>
+<li>Documentation:  <a href="https://help.ubuntu.com" target="_blank" rel="noopener">https://help.ubuntu.com</a><ul>
+<li>Management:     <a href="https://landscape.canonical.com" target="_blank" rel="noopener">https://landscape.canonical.com</a></li>
+<li>Support:        <a href="https://ubuntu.com/advantage" target="_blank" rel="noopener">https://ubuntu.com/advantage</a><br>Get cloud support with Ubuntu Advantage Cloud Guest:<br><a href="http://www.ubuntu.com/business/services/cloud" target="_blank" rel="noopener">http://www.ubuntu.com/business/services/cloud</a><br>83 packages can be updated.<br>0 updates are security updates.<br>Last login: Sun Oct  8 06:40:43 2017 from 115.200.175.117<br>通过 SSH 密码验证登录<br>$ ssh <a href="mailto:user@35.189.175.199" target="_blank" rel="noopener">user@35.189.175.199</a><br>Permission denied (publickey).<h2 id="之所以会出现这种情况，因为谷歌默认把密码验证登录关了，需要自行打开"><a href="#之所以会出现这种情况，因为谷歌默认把密码验证登录关了，需要自行打开" class="headerlink" title="之所以会出现这种情况，因为谷歌默认把密码验证登录关了，需要自行打开"></a>之所以会出现这种情况，因为谷歌默认把密码验证登录关了，需要自行打开</h2>$ sudo vi /etc/ssh/sshd_config<br>PasswordAuthentication yes<br>:wq!<h2 id="改完要重启-ssh-服务"><a href="#改完要重启-ssh-服务" class="headerlink" title="改完要重启 ssh 服务"></a>改完要重启 ssh 服务</h2>$ sudo service sshd restart<br>##再次连接<br>$ ssh <a href="mailto:user@35.189.175.199" target="_blank" rel="noopener">user@35.189.175.199</a><br><a href="mailto:user@35.189.175.199" target="_blank" rel="noopener">user@35.189.175.199</a>‘s password: (输入实例用户的密码)<br>Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.11.2-041102-generic x86_64)</li>
+</ul>
+</li>
+<li>Documentation:  <a href="https://help.ubuntu.com" target="_blank" rel="noopener">https://help.ubuntu.com</a><ul>
+<li>Management:     <a href="https://landscape.canonical.com" target="_blank" rel="noopener">https://landscape.canonical.com</a></li>
+<li>Support:        <a href="https://ubuntu.com/advantage" target="_blank" rel="noopener">https://ubuntu.com/advantage</a><br>Get cloud support with Ubuntu Advantage Cloud Guest:<br><a href="http://www.ubuntu.com/business/services/cloud" target="_blank" rel="noopener">http://www.ubuntu.com/business/services/cloud</a><br>83 packages can be updated.<br>0 updates are security updates.<br>Last login: Sun Oct  8 06:59:24 2017 from 115.200.175.117<h1 id="至此大功告成"><a href="#至此大功告成" class="headerlink" title="至此大功告成"></a>至此大功告成</h1></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/26/ssh/" data-id="cjluyeip7000112ncz6983abw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/09/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT相关/">IT相关</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/09/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/26/ssh/">Google Cloud Platform SSH 连接配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
