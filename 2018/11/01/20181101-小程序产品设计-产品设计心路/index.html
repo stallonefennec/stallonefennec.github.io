@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="产品设计," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.赚邦要不要做微信小程序？在现在这个时间节点，这个问题其实没有意义：只要我们仍在需要大量获取新用户的阶段（appstore排行榜50名以后大约都可以投身），只要我们的小程序有富余的时间（即便砍掉现在正打算排期的需求），不要犹豫，速度立项，速度开干。 为什么这么说？">
+<meta name="keywords" content="产品设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小程序产品设计">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/20181101-小程序产品设计-产品设计心路/index.html">
+<meta property="og:site_name" content="Life is short">
+<meta property="og:description" content="1.赚邦要不要做微信小程序？在现在这个时间节点，这个问题其实没有意义：只要我们仍在需要大量获取新用户的阶段（appstore排行榜50名以后大约都可以投身），只要我们的小程序有富余的时间（即便砍掉现在正打算排期的需求），不要犹豫，速度立项，速度开干。 为什么这么说？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-02T03:32:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小程序产品设计">
+<meta name="twitter:description" content="1.赚邦要不要做微信小程序？在现在这个时间节点，这个问题其实没有意义：只要我们仍在需要大量获取新用户的阶段（appstore排行榜50名以后大约都可以投身），只要我们的小程序有富余的时间（即便砍掉现在正打算排期的需求），不要犹豫，速度立项，速度开干。 为什么这么说？">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/01/20181101-小程序产品设计-产品设计心路/"/>
+
+
+
+
+
+  <title>小程序产品设计 | Life is short</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Life is short</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/20181101-小程序产品设计-产品设计心路/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fennec">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life is short">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">小程序产品设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T00:00:00+00:00">
+                2018-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WORK/" itemprop="url" rel="index">
+                    <span itemprop="name">WORK</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-赚邦要不要做微信小程序？"><a href="#1-赚邦要不要做微信小程序？" class="headerlink" title="1.赚邦要不要做微信小程序？"></a>1.赚邦要不要做微信小程序？</h2><p>在现在这个时间节点，这个问题其实没有意义：只要我们仍在需要大量获取新用户的阶段（appstore排行榜50名以后大约都可以投身），只要我们的小程序有富余的时间（即便砍掉现在正打算排期的需求），不要犹豫，速度立项，速度开干。</p>
+<p>为什么这么说？<br> <a id="more"></a><br>第一，在当下这个时间节点，做微信小程序的意义大于做的事本身，迅速投入是一种商业策略。从营销角度看，这种红利千载难逢，在行业都翘首以盼的时候，只有率先进入赛道，争抢体验和报道都是可预期的，ROI（投资回报率）比其他任何平台都来得稳妥。</p>
+<p>第二，迅速入场，占据优势地位。虽然微信之前开辟了内测名额，少部分人提前体验了小程序，但总得来说，目前大家基本都在同一起跑线上，这时候迅速入场，抢占先发优势，就有机会从领跑变成持续领先——这个机会在现有的其他平台几乎是不存在了。</p>
+<h2 id="2-小程序定位"><a href="#2-小程序定位" class="headerlink" title="2.小程序定位"></a>2.小程序定位</h2><p>对于目前公司而言，小程序究竟是一个什么产品定位？以目前的大环境而言，无非就是几个关键点：</p>
+<ul>
+<li>蹭一波热点：吸引眼球，做小程序这件事情本身就是一个吸引眼球的事情；</li>
+<li>延伸产品线：对已有产品线做一个开辟，确保整个线的完整性；</li>
+<li>借助小程序：赶上这趟车，营销导流；</li>
+</ul>
+<h2 id="3-设计探讨"><a href="#3-设计探讨" class="headerlink" title="3.设计探讨"></a>3.设计探讨</h2><p>想玩转微信小程序，我们需要搞清楚两个问题：</p>
+<p>微信想要我们做什么？<br>微信小程序可以做什么？<br>微信想要我们做什么？<br>首先来弄清楚微信的意图。之前张小龙曾公开过对微信应用号的一些看法，再联系到他总结的微信产品观，大概可以总结出如下重点：</p>
+<p>（1）服务用户，不打扰用户，用完即走</p>
+<p>张小龙这种朴素浪漫主义情节一直反映在他的微信产品观中，小程序也不例外。从人性出发，用户被任何APP每天占据大量时间都是不合理的，微信也是——虽然它已经实现了。这个幸福的负担也就成了微信的枷锁（或者说是张小龙的枷锁），一旦出现决策偏差或用力过度，影响范围不可想象，稳健或许是微信最可行的方针。相应地，小程序也要贯彻这套产品观。小程序的设计规范里，不允许推送、不允许转发至朋友圈、不允许诱导关注，一而再地强调服务导向，用户主动寻找服务，用完即走。</p>
+<p>（2）服务号未实现目标，小程序予以补充和提升</p>
+<p>并不太具备存在感的服务号，显然并没有实现微信对它的期望。服务号上线之初，也是希望可以在消息列表中为用户提供更多样化的服务，同时也提供给那些低频工具或商户，一个连接用户提供服务的可能，免除独立开发APP的成本。然而受入口位置、推送频次、交互展示、功能等限制，大部分服务号只不过是企业多了一个消息推送号，并没有拓展出新的领域。</p>
+<p>（3）刺激微信生态</p>
+<p>微信已经不年轻了。想想微信这几年的发展，曾几何时，摇一摇、群对话、朋友圈、抢红包，几乎包围了我们的生活。然而现在，有多少人关闭了朋友圈提醒？有多少人对所有微信群设置了消息免打扰？又有多少人，在朋友圈里已经看不到熟悉的人的名字？某种意义上，逃离碎片化时间几乎等同于逃离微信。而与此同时，这些年又有大量的第三方应用，通过微信得到了巨大的流量红利，比如脸萌、天天P图、微信群助手、还有各种曾经刷爆朋友圈的H5小游戏，等等。这份蛋糕，微信其实也可以自己吃掉……</p>
+<p>无论出于防守还是进攻，微信都需要新的突破。小程序实际上是一种众包行为，通过第三方共同塑造一个更完整的微信生态，提供更多新的可能，也提供更多试错，根据用户反馈不断调整策略。微信在设计规范中明确提出不允许开发与现有服务类似的功能，也印证了这一观点。这对微信和第三方来说，都是一种双赢。</p>
+<p>（4）流量变现</p>
+<p>对于变现，微信一直做得很谨慎。然而开放小程序，使得微信可以较好地保护现有的用户体验，同时又增加出更多向B端实现流量变现的场景。</p>
+<p>微信小程序可以做什么？</p>
+<p>考虑微信诉求的同时，也需要看看微信的能力。对我们这些应用者来说，微信小程序的实际价值在于：</p>
+<p>（1）流量入口</p>
+<p>毋庸置疑，微信的流量有多大意义，看看现在这些围绕微信的商业模式吧。</p>
+<p>（2）社交关系</p>
+<p>微信作为最庞大的社交关系链，这对于任何一家公司来说都是非常有意义的。积淀在微信中的熟人关系、行业关系、社群关系，已经形成了极具说服力的用户分层，这些圈子可以帮助任何一家公司直达目标用户，尤其是自身尚未利用社交优势的APP，完全可以借助微信的社交关系链助力自身业务。</p>
+<p>（3）用户数据</p>
+<p>即便是对社交关系没有太多期待，用户数据本身也足够有价值了。在用户授权的前提下，如果能获取到用户的社交关系、社交内容、位置信息、使用频次等数据，无论是要精准获客、精准营销还是精准变现，都将带来极大的帮助。</p>
+<p>（4）提升体验</p>
+<p>比起之前的服务号，小程序支持更丰富的功能和交互，给设计者留下了更多发挥空间，无疑会给用户带来更好的使用体验。根据目前内测的小程序表现，小程序的体验流畅度远高于预期。</p>
+<h2 id="4-设计关键词"><a href="#4-设计关键词" class="headerlink" title="4.设计关键词"></a>4.设计关键词</h2><p>根据以上调研和分析，对于微信小程序的设计先总结出如下6个关键词：</p>
+<p>轻量：让用户便捷、迅速、简单地获取服务，不要挑战微信的产品观。<br>社交：必须和微信生态融入，那就必须考虑到微信的生态基因。抛开社交关系链做的话，最大的可能性是过于平庸导致反响平平。<br>价值：小程序本身不是为了哗众取众，必须对用户有切实的价值，能够让用户在有需要时主动进入，主动唤醒。<br>引流：对于第三方来说，微信必须是重要的流量入口。在微信允许的范围内，用可能的手段获取用户流量，是我们需要着重考虑的。<br>数据：即便没有引流成功，至少要获取用户数据，支持自有APP开展业务。<br>生态：如果已经有了微信公众号、服务号，在微信生态内考虑和小程序相互依托，互为补充。<br>4.设计思路</p>
+<p>到了下结论的时候了。虽然不同的业务会有很大差异，但总体上，设计思路都可以从以下5个方面入手：</p>
+<p>（1）不要局限于工具思维，而是基于服务做拓展外延</p>
+<p>很多文章都在聊小程序目前最好做的是工具。话虽然没错，但不要局限于工具思维，最核心的仍然是服务。从目前你所在的业务大类出发，用户究竟需要什么样的服务？用户在进入APP前和离开APP后，场景上需要有什么补充？可能分析下来和你的APP主营业务并不完全一致，没有关系，只要能达到你对微信小程序的预期就可以了。<br>举例来说，如果一家阅读类APP只是单纯将内容聚类和搜索的功能移植到微信小程序，并不能给用户带来更多期待，也很难做到让用户主动去唤醒小程序。如果跳出APP主营业务，回归阅读这件事本身，用户在开始阅读之前如何引起阅读兴趣？阅读之后是否有摘录的需求？这时候，或许深挖摘录这个点会比直接做内容更有意义。</p>
+<p>（2）自有APP切入社交关系</p>
+<p>微信的社交关系链是个大宝藏，从这个点切入和微信的使用场景做结合，用户也更好接受。而更有意义的是，利用微信小程序获取用户社交关系，拓展自有产品的业务模式和服务范围。<br>仍以阅读类APP为例，假设上述的摘录需求和社交做结合，在摘录中可以二次批注，相互交流，不断深挖，既能把主营业务和社交结合起来，又符合价值化、轻量化、略带浪漫主义情节的微信产品观。</p>
+<p>（3）融入微信生态</p>
+<p>时刻记得微信小程序是在微信内，与微信的所有功能息息相关，要尽可能深入地融入微信生态，不要孤立地做设计。微信小程序是微信生态的一部分，更是衔接用户、服务、信息三者的重要载体，在设计之初就要考虑到生态的搭建和后续扩展。<br>继续说阅读类APP，如果确定要通过摘录做切入点，那么摘录的来源可能是公众号推送的文章、群聊天记录、或者是自家服务号推送的活动信息，让你的小程序融入整个微信，并为后续服务升级、用户体系升级、变现模式、或者是衔接微信的其他功能服务留好余地。</p>
+<p>（4）如果不能直接分享到朋友圈，那就换一个姿势分享</p>
+<p>相信获取流量是各家都想实现的目标，分享功能依然重要。如果微信不允许直接分享到朋友圈，那么就在聊天上多下功夫，一个群聊内的分享并不一定比朋友圈差。又或者，使用其他手段将你的微信小程序暴露在朋友圈里，间接实现分享的目的。再次，还有扫一扫和搜索可以利用。总之，在不触犯微信规则的前提下，尽可能扩大你能接触到的用户范围。</p>
+<p>（5）胜在轻巧</p>
+<p>微信小程序的设计方案需要遵从轻巧的原则。这两个字要分开来看：一个是轻，即轻量，用户能够快速进入，快速享受到服务，快速离开，使用过程中没有心理负担；一个是巧，即巧妙，创意永远是制胜法宝，仅仅移植web或app的功能很难达到预期的目标，只有为微信小程序量身订制、富有创新、充满心意的设计，才能稳稳把红利抓牢。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/产品设计/" rel="tag"># 产品设计</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/11/2018-10-11-产品设计心路/" rel="next" title="产品设计心路">
+                <i class="fa fa-chevron-left"></i> 产品设计心路
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Fennec</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-赚邦要不要做微信小程序？"><span class="nav-number">1.</span> <span class="nav-text">1.赚邦要不要做微信小程序？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-小程序定位"><span class="nav-number">2.</span> <span class="nav-text">2.小程序定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-设计探讨"><span class="nav-number">3.</span> <span class="nav-text">3.设计探讨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-设计关键词"><span class="nav-number">4.</span> <span class="nav-text">4.设计关键词</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fennec</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
