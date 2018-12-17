@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="用户分析," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、认识加载1.1   什么是加载用户在客户端发出一个指令后，直到客户端出现反馈结果时，这段时间内计算机完成的一系列执行动作，可能包括有客户端发出请求，服务器做出响应，客户端拿到数据后计算，渲染等，当我们点击应用图标后，软件需要将文件或者数据从Rom读取到Ram，这也是一个加载过程。">
+<meta name="keywords" content="用户分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App的加载设计">
+<meta property="og:url" content="http://yoursite.com/2018/12/17/20181217-App的加载设计/index.html">
+<meta property="og:site_name" content="Life is short">
+<meta property="og:description" content="一、认识加载1.1   什么是加载用户在客户端发出一个指令后，直到客户端出现反馈结果时，这段时间内计算机完成的一系列执行动作，可能包括有客户端发出请求，服务器做出响应，客户端拿到数据后计算，渲染等，当我们点击应用图标后，软件需要将文件或者数据从Rom读取到Ram，这也是一个加载过程。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/12/17/20181217-App的加载设计/”xxx”">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/2mWvwTZrgtRcddyxJzhS.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/1ZQdD6ssyaeQMmkxyB2r.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/wRIPCWDBxnla4iW10pm4.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/Z32So1TM7octGjRuskhV.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/U1z5N6z0UKaNOrJBctOK.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/IFk2xxGxfih34via5Np8.png">
+<meta property="og:updated_time" content="2018-12-17T06:13:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="App的加载设计">
+<meta name="twitter:description" content="一、认识加载1.1   什么是加载用户在客户端发出一个指令后，直到客户端出现反馈结果时，这段时间内计算机完成的一系列执行动作，可能包括有客户端发出请求，服务器做出响应，客户端拿到数据后计算，渲染等，当我们点击应用图标后，软件需要将文件或者数据从Rom读取到Ram，这也是一个加载过程。">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/17/20181217-App的加载设计/”xxx”">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/17/20181217-App的加载设计/"/>
+
+
+
+
+
+  <title>App的加载设计 | Life is short</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Life is short</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/20181217-App的加载设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fennec">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life is short">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">App的加载设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-17T00:00:00+00:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WORK/" itemprop="url" rel="index">
+                    <span itemprop="name">WORK</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、认识加载"><a href="#一、认识加载" class="headerlink" title="一、认识加载"></a>一、认识加载</h2><h3 id="1-1-什么是加载"><a href="#1-1-什么是加载" class="headerlink" title="1.1   什么是加载"></a>1.1   什么是加载</h3><p>用户在客户端发出一个指令后，直到客户端出现反馈结果时，这段时间内计算机完成的<strong>一系列执行动作</strong>，可能包括有客户端发出请求，服务器做出响应，客户端拿到数据后计算，渲染等，当我们点击应用图标后，软件需要将文件或者数据从Rom读取到Ram，这也是一个加载过程。</p>
+ <a id="more"></a>
+<h3 id="1-2-加载有什么用"><a href="#1-2-加载有什么用" class="headerlink" title="1.2 加载有什么用"></a>1.2 加载有什么用</h3><p>加载是电脑接收到用户的指令然后实现用户的目标所必须经历的一个过程，如果没有加载的话，计算机就无法实现用户的目标。</p>
+<h3 id="1-3-加载带来的问题"><a href="#1-3-加载带来的问题" class="headerlink" title="1.3 加载带来的问题"></a><strong>1.3 加载带来的问题</strong></h3><p>有些加载过程的时间可能会比较长，甚至用户不知道此时应用是卡死了还是在执行命令，这样就会导致用户体验降低，用户会对应用失去耐心。</p>
+<h2 id="二、如何解决加载带来的问题"><a href="#二、如何解决加载带来的问题" class="headerlink" title="二、如何解决加载带来的问题"></a>二、如何解决加载带来的问题</h2><h3 id="第一步：梳理App中有哪些加载场景"><a href="#第一步：梳理App中有哪些加载场景" class="headerlink" title="第一步：梳理App中有哪些加载场景"></a>第一步：梳理App中有哪些加载场景</h3><p>要针对App内的加载场景带来的问题进行设计，首先肯定是先罗列出我们的App中有哪些加载场景，然后针对不同的加载场景选取对应的方法进行设计。</p>
+<p>下面罗列了在不同App中经常出现的一些加载场景，其实在我们自己设计的App中大部分加载场景也就是这些，当然不同的App情况也不完全一样，还是需要我们针对不同的App去梳理的。那么我们如何梳理呢？将那些发出指令后应用需要长时间处理的加载过程都罗列出来，简单说就是把那些慢的地方都找出来。</p>
+<p><strong>常见的加载场景：</strong></p>
+<ol>
+<li>应用启动</li>
+<li>登录注册</li>
+<li>上传，下载</li>
+<li>加载大量图片文字的情况，图片列表等</li>
+<li>下拉刷新</li>
+<li>上拉加载数据</li>
+<li>点赞</li>
+<li>进入新页面</li>
+<li>手机付款</li>
+</ol>
+<h3 id="第二步：采取对应的解决办法"><a href="#第二步：采取对应的解决办法" class="headerlink" title="第二步：采取对应的解决办法"></a>第二步：采取对应的解决办法</h3><p>梳理完了App中的加载场景后，接下来我们针对不同的加载场景采取对应的解决办法即可，这里为什么是对应的解决办法呢？因为接下来要讲的解决办法也不是你想怎么用就怎么用的，我们要根据情况来选择</p>
+<p><strong>第一个办法：选用加载策略</strong></p>
+<p>下面是一些常见的加载策略，我们可以针对不同的加载场景，选用合适的加载策略。</p>
+<p><strong>1、分步加载：</strong></p>
+<p>优先加载占网络资源较小的元素。如先文字和默认图标后图片，图片加载完成前使用占位符显示。</p>
+<p><strong>２、懒加载（又称为延迟加载）</strong></p>
+<p>在网页中，常常需要用到图片，而图片需要消耗较大的流量。正常情况下，浏览器会解析整个HTML代码，然后从上到下依次加载<img src="”xxx”">的图片标签。如果页面很长，隐藏在页面下方的图片其实已经被浏览器加载了。如果用户不向下滚动页面，就没有看到这些图片，相当于白白浪费了图片的流量，不仅浪费了流量，速度也很慢。</p>
+<p>但是，淘宝、京东这些流量非常巨大的电商，商品介绍页又必须有大量的图片，因此，这些页面的图片都是“按需加载”，即用户滚动页面时显示出来的时候才加载图片。当网速非常快的时候，用户并不能感知懒加载的动作，既省流量又不影响用户浏览。</p>
+<p><strong>3、预加载</strong></p>
+<p>通常应用在信息流中。比如搜索结果页，也就是我们经常看到的列表视图。当我们“将要滑到”页面底部时，页面自动请求数据，为你加载出下一页。所以一般你在浏览下图这种列表时，感觉非常流畅。因为页面进行了预加载。</p>
+<p>预加载是贴心的小棉袄，会揣摩用户的心思，偷偷提前做准备。用户在看A页面时，客户端就在准备用户可能会看的B页面，用户需要时，立刻给他，然后去准备C页面，给用户提供无缝链接的感觉，代价就是服务端、客户端都累的够呛，耗费用户更多的流量。</p>
+<p>懒加载和预加载好像是相反的策略，那我们到底用哪个呢？如果用户需要看的列表中图片很多，文字较少，这种情况我们可能使用懒加载比较好，如果用户要看的页面并不需要花费太多流量，那我们预加载可能就好一点，或者在wifi下使用预加载，在4g网络时使用懒加载。</p>
+<p><strong>4、智能加载</strong></p>
+<p>根据不同的网络状况来加载不同的数据：</p>
+<ul>
+<li>在WIFI条件下：优先加载高质量图片、优质音乐和视频；</li>
+<li>在4G条件下：下载行为自动终止，优先加载普通甚至停止加载图片或音乐视频；</li>
+<li>在网络不通畅下：默认加载低质量甚至停止加载图片或音乐视频；</li>
+</ul>
+<p><strong>5、渐进加载</strong></p>
+<p>我们在PC端用浏览器看图片的时候,经常是先看到一张模糊图，然后再渐渐的变得清晰,这种情况在看漫画的时候尤其常见，这种效果就叫做渐进式加载，渐进式加载能够大大的提升体验感。</p>
+<p><strong>6、后台加载</strong></p>
+<p>用户在操作后，客户端立刻反馈操作成功，然后把请求放到后台与服务器交互，这一过程用户不需要了解，不需要等待，在正常情况下体验是非常棒的。</p>
+<p>但是在极端情况下会出现一些莫名其妙的状况，由于是后台记录请求并与服务器交互，所以实际请求是否成功客户端是不说明的，全部以操作成功来显示，这就会导致用户误以为操作成功了，但实际上下次来看发现没有成功。</p>
+<p>所以这种加载方式是需要根据具体使用场景来权衡使用的，对于一些重要的操作，建议还是使用模态的方式加载，对于一些小操作，如点赞、订阅、关注，可采用后台加载的方式。</p>
+<p><strong>小结：</strong></p>
+<p>这些加载策略能在很大程度上提高用户的体验，但是我们可以看到，这些加载策略除了后台加载外，其他的加载策略基本都是针对图片文字的加载的，也就是对应于我们刚才列举的众多加载场景中的加载大量文字图片和进入新页面这两个场景，因此我们可以看出，这些加载策略能解决的加载场景是比较有限的，不过这些加载场景也是我们在应用中最频繁遇到的加载场景。</p>
+<p><strong>第二个办法：提示</strong></p>
+<p>除了第一个办法外我们还能做点什么呢？不能加快加载速度的话，我们就不管了吗？显然不是，其实用户对于应用中合理的加载比较慢的过程是可以理解的，因为很多操作本来就需要一定的时间，你要下载个很大的视频，一下子就下载好目前还不具备这样的技术，其次很多加载过程慢不是应用的错，你的手机卡，难道怪我吗？你的网络慢难道怪我？</p>
+<p>但是我们在设计应用时也可以帮用户分担这些忧虑，尽量给用户好的体验，那么我们就应该在这些加载过程比较慢的地方加入合理的提示，让用户心理有数，而不是误以为手机卡死了，或者应用失灵了。这些合理的提示对于用户体验的提高是显而易见的，接下来让我们看看应该如何提示用户。</p>
+<p><strong>１、提示类型：中断用户操作</strong></p>
+<p>在有些加载场景下，我们需要中断用户的其他操作，用户只能等待加载场景结束，因为如果用户执行了其他操作就会打断正在进行的加载过程，实现不了用户的目标，用户就得重新加载，那么我们如何知道哪些加载场景是需要中断用户操作的，哪些又是不需要的呢？</p>
+<p><strong>一般来说需要中断用户操作的加载过程主要有两种情况</strong></p>
+<ul>
+<li>①用户接下来的操作与这一步的操作密切相关，如果这一步操作未执行成功则接下来的操作也不能进行。比如登陆，退出，应用启动，手机支付等，这种场景的确定需要我们结合具体的应用功能和业务场景来确定。</li>
+<li>②用户执行的操作本身不能和其他操作同时进行，不知道大家有没有用过微信迁移聊天记录的功能，在迁移聊天记录的过程中，应用有提示：“请始终保持微信在屏幕显示”，这时如果我们做了其他事情，将会打断传输过程，这种场景的确定需要我们和开发人员沟通。</li>
+</ul>
+<p><strong>当我们确定了提示类型是需要中断用户操作的该怎么提示用户呢？</strong></p>
+<p>①如果中断时间比较短，我们可以使用模态提示，模态提示就是在屏幕中间会弹出一个提示框，除了提示框以外的区域都会变灰，变灰就代表其他部分都不能点击，比如下图中的登陆，退出。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/2mWvwTZrgtRcddyxJzhS.png" alt="img"></p>
+<p>当然也不是说只能用模态提示，当我们的App在启动时，需要将文件和数据从Rom中读取到Ram中，这个过程也比较长，且用户也不能执行任何操作，几乎所有的App都是使用广告页来占用这段时间的，而不是模态提示，所以我们还是要灵活运用。除了广告页，我们还可以使用品牌页，活动页来占用加载过程。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/1ZQdD6ssyaeQMmkxyB2r.png" alt="img"></p>
+<p>②如果中断时间比较长，我们需要使用专门的页面来提示用户，以引起用户的重视。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/wRIPCWDBxnla4iW10pm4.png" alt="img"></p>
+<p><strong>注意：</strong>当加载过程需要中断用户的其他操作的话，我们最好给用户留下取消加载过程的按钮，当用户不想加载了可以取消加载。</p>
+<p>总的来说需要中断用户操作的加载场景相对不中断的还是要少很多的。</p>
+<p><strong>2、提示类型：不中断用户操作</strong></p>
+<p>如果我们的加载场景不需要打断用户的操作，常见的提示方式有导航栏提示用户，在控件本身提示用户，或者页面局部区域提示用户。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/Z32So1TM7octGjRuskhV.png" alt="img"></p>
+<p>在导航栏对用户进行提示是一个不错的选择，但是我看了很多应用，都没有将提示内容放到导航栏，为什么？因为大部分应用的导航栏，不是被各种搜索框占用，就是各种选项卡占用，根本就没有空间用来放提示内容。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/U1z5N6z0UKaNOrJBctOK.png" alt="img"></p>
+<p>在控件自身提示这种方式也比较好，可以让用户知道他的操作针对的是哪一个对象，这种提示方式一般适用于有具体的操作对象的加载过程，如果我要是想刷新，显然就不能用这种方式了，因为刷新并没有一个具体的对象。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/IFk2xxGxfih34via5Np8.png" alt="img"></p>
+<p>第一个图是在下拉刷新时的提示，第二个图是在进入新页面的时候在页面中央提示的，有些同学可能要问了，第二幅图都白屏了，难道不算打断用户操作的类型吗？</p>
+<p>其实这种情况下，我们依然可以点击底部菜单栏和导航栏中的tab栏，所以并不能算作打断了用户的操作。页面局部区域提示可以说是应用中最广泛的一种提示方式了，几乎每个应用中，都存在这样的提示方式，这种方式设计起来最简单，也是最成熟的设计方式。</p>
+<p><strong>3、提示内容</strong></p>
+<p>提示内容包括文字和图片。</p>
+<p>如果是使用文字的话，文字应该尽量准确的告诉用户，应用正在加载什么，不要让用户去猜，比如之前我放的关于登录的截图，图中使用的是正在加载，这里如果能改成登录中就更好了，关于这个提示内容这一块大家可以去观察一下微信的提示文字怎么写的，收取中……，连接中……等等，相信用户更愿意看到这样的提示内容而不是干巴巴的正在加载。</p>
+<p>其实大部分情况下提示内容都是使用文字，使用图片的机会比较少，这里说的是那种图片式的，有些还会有动画效果，而不是那种转圈圈的小图标，为什么图片使用的少呢，因为图片占用的空间大啊，一般来说只有在进入新页面的时候有些应用会使用一些可爱的图片来分散用户的注意力，但是我相信就算用户第一次，第二次，第三次对你的图片感兴趣，时间长了，再好看的图片也会让用户觉得没什么意思。</p>
+<p><strong>小结：</strong></p>
+<p>好了我们的第二个办法给用户提示也说完了，这里还有一点要补充的，那就是，不管是什么形式的提示，如果能给出进度条，最好采用进度条的方式，但是能给出进度条的加载场景也不是很多，因为我们大部分的加载场景和网络有关，如果网络不好的话，谁知道加载到什么时候呢，一般来说下载，上传这类场景都可以给出进度条。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>写了这么多其实设计加载场景的本质思想并不复杂：</p>
+<p>首先找出应用中加载时间比较慢的操作，只要是慢的地方都算进来</p>
+<p>然后根据加载场景来看，如果能用得到加载策略就用加载策略，如果用不了的话就合理的提示用户，当然不是说用了加载策略就不用提示用户，如果用了加载策略还会有点慢，我们一样要提示用户</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/用户分析/" rel="tag"># 用户分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/17/20181217-App授权设计/" rel="next" title="App授权设计">
+                <i class="fa fa-chevron-left"></i> App授权设计
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Fennec</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、认识加载"><span class="nav-number">1.</span> <span class="nav-text">一、认识加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-什么是加载"><span class="nav-number">1.1.</span> <span class="nav-text">1.1   什么是加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-加载有什么用"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 加载有什么用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-加载带来的问题"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 加载带来的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、如何解决加载带来的问题"><span class="nav-number">2.</span> <span class="nav-text">二、如何解决加载带来的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：梳理App中有哪些加载场景"><span class="nav-number">2.1.</span> <span class="nav-text">第一步：梳理App中有哪些加载场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：采取对应的解决办法"><span class="nav-number">2.2.</span> <span class="nav-text">第二步：采取对应的解决办法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结："><span class="nav-number">3.</span> <span class="nav-text">总结：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fennec</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

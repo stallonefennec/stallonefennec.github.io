@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="用户分析," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、认识授权1.1 什么是授权授权机制，是手机操作系统安全机制中的一部分，在开发应用时需要用到各种各样的手机系统权限。 一般来说，在操作系统中权限会被分类，有些权限级别较低，应用只需在开发时声明即可使用；而与用户有关的权限级别都非常高，需要用户亲自授权才可以。 我们的产品中的功能经常会涉及到这些权限，为了能使应用正常使用，从而给用户带来更好的体验，我们希望用户都能授予我们相关权限。">
+<meta name="keywords" content="用户分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App授权设计">
+<meta property="og:url" content="http://yoursite.com/2018/12/17/20181217-App授权设计/index.html">
+<meta property="og:site_name" content="Life is short">
+<meta property="og:description" content="一、认识授权1.1 什么是授权授权机制，是手机操作系统安全机制中的一部分，在开发应用时需要用到各种各样的手机系统权限。 一般来说，在操作系统中权限会被分类，有些权限级别较低，应用只需在开发时声明即可使用；而与用户有关的权限级别都非常高，需要用户亲自授权才可以。 我们的产品中的功能经常会涉及到这些权限，为了能使应用正常使用，从而给用户带来更好的体验，我们希望用户都能授予我们相关权限。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/MImy9RfFYAWIoCjPAqoR.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/HRkxxp4OCfzoRg6NmmOq.jpg">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/a6VFodpFKwE9SlOKiKS2.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/XjMhaD7CdEky19rNxwPW.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/do0cZXytQWtSvoQKOXrW.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/Wv8wpILwZ2trDplfOwUZ.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/qe5xfP7Rc8Mr3ACqBr9w.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/Mt6vzP6wJRA3yECWP9qt.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/Yqzq93wnAJUpWa1hP9IE.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/uyDGrofVI3J8EcVSfhVv.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/oc5yzxsnMWsEl3WPFX4q.png">
+<meta property="og:image" content="http://image.woshipm.com/wp-files/2018/03/bJv3CMzlo5twijO00VRT.png">
+<meta property="og:updated_time" content="2018-12-17T06:12:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="App授权设计">
+<meta name="twitter:description" content="一、认识授权1.1 什么是授权授权机制，是手机操作系统安全机制中的一部分，在开发应用时需要用到各种各样的手机系统权限。 一般来说，在操作系统中权限会被分类，有些权限级别较低，应用只需在开发时声明即可使用；而与用户有关的权限级别都非常高，需要用户亲自授权才可以。 我们的产品中的功能经常会涉及到这些权限，为了能使应用正常使用，从而给用户带来更好的体验，我们希望用户都能授予我们相关权限。">
+<meta name="twitter:image" content="http://image.woshipm.com/wp-files/2018/03/MImy9RfFYAWIoCjPAqoR.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/17/20181217-App授权设计/"/>
+
+
+
+
+
+  <title>App授权设计 | Life is short</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Life is short</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/17/20181217-App授权设计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fennec">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Life is short">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">App授权设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-17T00:00:00+00:00">
+                2018-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WORK/" itemprop="url" rel="index">
+                    <span itemprop="name">WORK</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、认识授权"><a href="#一、认识授权" class="headerlink" title="一、认识授权"></a>一、认识授权</h2><h3 id="1-1-什么是授权"><a href="#1-1-什么是授权" class="headerlink" title="1.1 什么是授权"></a><strong>1.1 什么是授权</strong></h3><p>授权机制，是手机操作系统安全机制中的一部分，在开发应用时需要用到各种各样的手机系统权限。</p>
+<p>一般来说，在操作系统中权限会被分类，有些权限级别较低，应用只需在开发时声明即可使用；而与用户有关的权限级别都非常高，需要用户亲自授权才可以。</p>
+<p>我们的产品中的功能经常会涉及到这些权限，为了能使应用正常使用，从而给用户带来更好的体验，我们希望用户都能授予我们相关权限。</p>
+ <a id="more"></a>
+<h3 id="1-2-需要用户授权的权限有哪些"><a href="#1-2-需要用户授权的权限有哪些" class="headerlink" title="1.2 需要用户授权的权限有哪些"></a><strong>1.2 需要用户授权的权限有哪些</strong></h3><p><strong>iOS需要用户授权的权限有下面两种：</strong></p>
+<p>①涉及到用户隐私的权限：</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/MImy9RfFYAWIoCjPAqoR.png" alt="img"></p>
+<p>②系统服务权限：</p>
+<ol>
+<li>无线网络与蜂窝数据（iOS10以后加入，中国大陆特有的权限）</li>
+<li>通知权限</li>
+<li>VPN</li>
+<li>键盘</li>
+</ol>
+<p>……</p>
+<p><strong>两种权限的区别：</strong></p>
+<p>涉及到用户隐私的授权弹窗中，可以添加简短的自定义的向用户解释说明的语句；而系统服务权限弹窗不可以添加说明，有系统的固定提示语。</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>iOS应用需要使用iCloud服务时，如果用户已经在iPhone上登录了iCloud，则不需要用户授权可以直接使用。</li>
+<li>使用TouchID，FaceID也不需要用户授权，可以直接在应用中开启。</li>
+</ol>
+<p><strong>Android中需要用户授权的权限：</strong></p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/HRkxxp4OCfzoRg6NmmOq.jpg" alt="img"></p>
+<p>Android6.0后有普通权限和危险权限之分，需要用户授权的权限是危险权限。危险权限共有9个权限组，每个权限组又包括若干子项，在授权时只要用户对一个权限组的任意一个子项授权，则整个权限组都被视为授权。</p>
+<p>9个权限组分别为：日历、相机、通讯录、定位、麦克风（用于录音）、电话（一般用于读取本机识别码）、传感器SMS（短信）、存储。</p>
+<p><strong>iOS与Android权限的区别：</strong></p>
+<p>在iOS和Android中对不同的权限需不需要用户授权，划分不一样。</p>
+<p>比如：iOS中最常见的通知权限和网络权限，都需要用户授权才能使用；而这两项权限在Android中则不需要用户授权，所以Android手机总是有很多弹窗，还有相册权限在Android中，也是不需要授权的。</p>
+<p>具体两者有何区别，可以结合上面给出的图自行对照，总的对比下来感觉iOS对于用户的保护是更到位的。</p>
+<p>要注意的是：像我们刚才所说的网络访问和通知权限，并没有在Android列表中列出，但这不代表Android中没有这两个权限，只是不需要用户授权而已。</p>
+<p>知道了iOS和Android的权限区别后，我们在设计时就知道同一项权限，需不需要针对两个系统分别做设计了。</p>
+<h3 id="１-3-常用授权"><a href="#１-3-常用授权" class="headerlink" title="１.3 常用授权"></a><strong>１.3 常用授权</strong></h3><ul>
+<li>第一梯队：网络，通知，位置；</li>
+<li>第二梯队：通讯录，相册，相机，麦克风等。</li>
+</ul>
+<p>Android和iOS的常用授权都一样，只不过Android不需要网络和通知权限，不需要授权相册。</p>
+<h3 id="1-4-iOS和Android在设计授权时的区别"><a href="#1-4-iOS和Android在设计授权时的区别" class="headerlink" title="1.4 iOS和Android在设计授权时的区别"></a><strong>1.4 iOS和Android在设计授权时的区别</strong></h3><p>（1）在Android中所有的系统授权弹窗，都是不能添加说明的；而在iOS中涉及到用户隐私的权限，在请求授权时都可以添加简单的说明。</p>
+<p>看似区别不大，但是对于用户的体验来说，iOS显然更胜一筹。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/a6VFodpFKwE9SlOKiKS2.png" alt="img"></p>
+<p>（2）Android的系统授权框可以出现多次，第一次用户进入应用后，如果没有授权给应用的话，那么下次当用户再次进入应用时，应用还可以调用系统授权框，让用户授权。</p>
+<p>在iOS中系统授权框自始至终只会出现一次，如果用户点击不允许授权，则以后只能通过给用户提供去设置按钮，让用户自行打开权限开关。</p>
+<p><strong>使用系统授权框让用户授权的好处：</strong></p>
+<p>通过系统提示框让用户授权，用户只用点击一下就可以授权成功，而通过去设置去开启权限步骤，会需要用户经过两三个步骤才能开启，比较繁琐。</p>
+<p>如果没有让用户在第一次授权成功，以后让用户授权成功的可能性更低，所以我们需要珍惜第一次机会，争取让用户一次性授权成功。</p>
+<p>虽然Android可以在下次用户进入应用时，再次调用系统授权框，可是如果用户第一次都不给你授权，以后又凭什么给你呢？</p>
+<p>所以不管是iOS还是Android，在第一次弹窗出现时，拿到用户的授权都是非常重要的</p>
+<p>（3）Android阵营中不同手机厂商的系统，在授权时的机制都不一样。</p>
+<p>比如：作为Android系统危险权限的存储权限，在oppo的ColorOS系统中就是向所有应用开放的，不用通过用户的授权，还有弹窗弹出次数的限制等。</p>
+<p>在oppo中竟然可以一直给用户弹出授权框，知道授权成功为止，如果进一步为了用户体验的提高，我们可以为不同的手机厂商做定制化处理。</p>
+<p>本文中按照适合大部分安卓手机的情况做介绍。</p>
+<h3 id="1-5-为什么要让用户给我们授权"><a href="#1-5-为什么要让用户给我们授权" class="headerlink" title="1.5 为什么要让用户给我们授权"></a><strong>1.5 为什么要让用户给我们授权</strong></h3><p>我们设计的应用中，往往一些功能需要用户给予相应权限，才能正常运行，这样才能为用户正常服务，给用户带来良好的体验。</p>
+<h3 id="1-6-用户授权过程中存在的问题"><a href="#1-6-用户授权过程中存在的问题" class="headerlink" title="1.6 用户授权过程中存在的问题"></a><strong>1.6 用户授权过程中存在的问题</strong></h3><ol>
+<li>很多应用，会向用户申请一些与功能关系不大的权限，导致用户对所有软件的信任度很低；</li>
+<li>应用拿到通知权限以后为所欲为，经常向用户发一些广告，没用的信息，骚扰用户；</li>
+<li>应用在向用户申请权限的时候，没有说清楚需要权限做什么用。</li>
+</ol>
+<p>这些因素导致了我们真正需要一些权限的时候，用户不再信任我们；导致我们软件中的正常功能获取不到权限，不能为用户提供良好的体验。</p>
+<h2 id="二、如何针对授权做设计"><a href="#二、如何针对授权做设计" class="headerlink" title="二、如何针对授权做设计"></a>二、如何针对授权做设计</h2><h3 id="第一步：确定应用中需要用到哪些权限"><a href="#第一步：确定应用中需要用到哪些权限" class="headerlink" title="第一步：确定应用中需要用到哪些权限"></a><strong>第一步：确定应用中需要用到哪些权限</strong></h3><p>梳理一遍应用中的功能，或者和开发沟通，确定我们都需要哪些系统权限，我们需要做到下面两点：</p>
+<ol>
+<li>确定这些权限确实需要，不去获取多余的权限；</li>
+<li>确定哪些要为iOS设计和哪些要为Android设计，还是都要设计。</li>
+</ol>
+<h3 id="第二步：针对每一个权限做下列设计"><a href="#第二步：针对每一个权限做下列设计" class="headerlink" title="第二步：针对每一个权限做下列设计"></a><strong>第二步：针对每一个权限做下列设计</strong></h3><p><strong>1. 设定系统弹窗弹出时机</strong></p>
+<p>在第一次打开应用时申请权限的劣势：</p>
+<ul>
+<li>用户对应用的信任感在一开始是最低的；</li>
+<li>一开始缺乏关联场景，用户不知道你要授权干什么。</li>
+</ul>
+<p><strong>（1）接下来看看什么样的权限，应该放在第一次打开应用的时候去申请？</strong></p>
+<p>1）网络权限（Android不用设计）</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/XjMhaD7CdEky19rNxwPW.png" alt="img"></p>
+<p>在进入时获取网络权限，这没什么好说的，没有网络权限我们什么也搞不了，直接调用系统授权框即可。</p>
+<p>2）通知权限（Android不用设计）</p>
+<p>这里我的建议就是，对于那些有过硬理由的通讯类应用来说，是可以在一开始请求获取通知权限的；对于没有过硬理由的应用来说，尽量找出那些用户需要用到通知服务的场景，在那时再弹出授权框。</p>
+<p><strong>原因：</strong>刚才说到了，在一开始去请求授权有两个劣势；但是对于那种有过硬理由的应用来说，不在一开始申请到的话，会对应用有比较大的影响。</p>
+<p>而第二个问题对于这种应用来说不用担心，对于没有过硬理由的应用来说，不申请到通知权限也不影响主要功能，所以没必要冒风险在一开始去申请。且等到用户遇到了需要被提醒的场景，再弹出授权框，肯定比一开始没有关联场景去申请要强得多。</p>
+<p>3）没有就会影响到正常使用的权限</p>
+<p>比如：对于照相类应用，如果在一开始没有拿到相机权限，那么进入应用后就会是黑屏，所以拍照权限就应该放到一开始去获取。</p>
+<p>注意：对于这种应用来说，获取相机权限就够了，相册权限也不要放到一开始去获取。</p>
+<p>再举个例子：百度云网盘在第一次打开时，也会提示你授予通讯录权限，为什么呢？因为百度云要帮你把通讯录信息同步到网盘中，如果不给权限的话，就没法同步。当然你也可以选择不同步通讯录，所以也会在一开始去向用户申请。</p>
+<p><strong>（2）使用到相关功能时</strong></p>
+<p>刚才我们已经解决了，哪些功能需要放到第一次打开应用的时候去申请。那么除了这些权限，剩下的就是属于：在用户使用到相关功能的时候再去申请的权限了。</p>
+<p>这些权限大部分都和授权场景有比较强的关联性，放在特定的授权场景触发是更好的选择。但这里也不是说，放在后面弹出弹窗的权限，一定都有比较强的场景关联性。</p>
+<p>最主要的是：如果你没有过硬的理由放在前面弹出，那就放在后面弹出吧。</p>
+<p>对于这类权限，这时候我们需要做一件事——找出需要用到这些权限的所有功能的触发点。</p>
+<p>比如：对于相机权限，那么触发场景有可能是拍照，有可能是扫一扫，触发点就是点击拍照按钮的那一刻，点击扫一扫按钮的那一刻，在这些触发点中，都要能出发授权弹窗。</p>
+<p><strong>２.是否需要pre-permission</strong></p>
+<p><strong>（1）什么是pre-permission</strong></p>
+<p>pre-permission简单说就是预授权，在系统授权弹窗出现以前，先弹出我们的自定义弹窗，甚至是页面。我们可以用我们的自定义弹窗，来测试用户是否想给我们授权？</p>
+<p>如果用户点击了我们自定义弹窗中的授权按钮，我们再弹出系统授权弹窗，如果用户不想在此时授权，则我们可以在后面合适的情况下，再次让用户给我们授权。</p>
+<p>这样相当于加了一层保险，只有当用户想给你授权的时候，才弹出系统授权弹窗，避免了用户点击了系统授权框的不允许后，造成再次授权的成本增高的问题。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/do0cZXytQWtSvoQKOXrW.png" alt="img"></p>
+<p><strong>（2）pre-permission这种设计方式出现的背景</strong></p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/Wv8wpILwZ2trDplfOwUZ.png" alt="img"></p>
+<p>这个方法出现在iOS早期版本，那时的iOS系统权限管理方面，没有现在这么完善。当用户关闭了系统的授权框后，如果需要再打开相关权限，就只能通过手动去设置页自己开启权限，整个过程需要五六个步骤，大大提高了用户的开启成本。</p>
+<p>如果用户在第一次拒绝了应用的授权请求时，如果再想让用户打开相关权限就非常困难。</p>
+<p><strong>（3）pre-permission有什么用</strong></p>
+<p>现在的iOS系统，在用户拒绝授权后，我们可以在下次出现的自定义弹窗中加入去设置按钮，用户只需要两三步就可以授权成功。</p>
+<p>最重要的是：以前用户很容易找不到在哪里去开启权限，而现在我们可以直接将用户引到到授权页，用户点击授权即可。可以说有了去设置这个按钮后，用户再次打开权限的成本大大降低，而pre-permission当初出现的原因，正是为了解决再次打开权限的成本高的问题。</p>
+<p>那么是不是说pre-permission这种方式已经过时了呢？</p>
+<p>答案当然是：没过时。</p>
+<p>首先虽然现在的再次授权成本大大降低，但毕竟还是没有系统授权框的授权体验好。</p>
+<p>但是最重要的不是这个，最重要的是：当用户不能很好的理解我们为什么需要授权的时候，我们可以在预授权的提示框中加入详细的说明，从而达到用户给我们授权的目的。</p>
+<p><strong>（4）接下来我们看哪些权限需要pre-permission</strong></p>
+<p>其实大部分的权限获取，通过系统自带的授权框都能解决问题。</p>
+<p>比如：相机、相册、定位等。</p>
+<p>这些权限的特点是和授权场景的关联性很强，只需要简单的文字用户就能理解我们需要权限干什么；用户理解后一般就会授予我们权限，如果用户不给我们权限的话，就不能使用相关功能。</p>
+<p>比如：他要修图，却不给我们相册权限，之后当用户发现没有权限不能修图后，自然会给我们权限，所以这些权限一般不用担心。</p>
+<p>比较特殊的是通知权限和通讯录权限。</p>
+<p><strong>我们先来说通知权限。</strong></p>
+<p><strong>先说结论：</strong>如果通知权限对应用影响很大，一定要加pre-permission。如果通知权限只是给用户提供一种便利，没有也影响不大。比如：淘宝、京东这些，可加可不加。</p>
+<p><strong>原因：</strong>通知权限几乎是每个应用都想拿到的权限，对于有些应用来说，通知权限是一个很重要的权限。</p>
+<p>比如：通讯类软件，消息需要实时的传达给用户，如果没有通知权限，对于应用的影响是非常大的，这类应用比较少。</p>
+<p>而对于其他应用来说，通知权限只是为了增加用户体验的一个方式而已，拿到最好，拿不到也无关痛痒。</p>
+<p>还有些应用拿到通知权限，就是为了给用户发一些没用的信息，而不考虑用户的感受，这种应用很多，拿不到也就算了。</p>
+<p>于是这就造成了一个问题：现在的用户一般都不想给应用通知权限，用户的感觉就是给了通知权限就会被不断的弹窗骚扰，再加上很多应用，都是用户刚一打开应用就让用户授予通知权限。而iOS中的通知框又不能添加说明文字，不能向用户说明应用获取通知权限的目的，所以大部分用户很多时候一看到通知权限就会下意识的不授予。一旦用户不授予通知权限，我们也不能像相机、相册、定位这样的权限一样，通过不让用户使用相关功能的方式，来再次提示用户去打开权限。因为即使没有通知权限，应用一定是可以正常运行的——于是拿到通知权限变成了一件非常难的事。</p>
+<p>关键的问题是：有些应用拿不到就拿不到了，而对于有的应用的影响是非常大的，甚至是致命的。这些应用不会去骚扰用户，但是也被用户误解了。</p>
+<p>所以对于这种应用来说，就需要一种方式来避免被用户误解，向用户说明需要通知权限去做什么，尽最大可能性拿到通知权限，那么pre-permission也就再次派上了用场。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/qe5xfP7Rc8Mr3ACqBr9w.png" alt="img"></p>
+<p><strong>再来说说通讯录权限。</strong></p>
+<p><strong>结论：</strong>不管什么应用，在申请通讯录权限时，最好都加上pre-permission</p>
+<p><strong>原因：</strong>在所有的权限中，哪个权限是用户感觉最涉及隐私的——大部分用户都会认为是通讯录权限。</p>
+<p>除非你的应用像微信，QQ这类让用户有足够安全感的应用，否则一般情况下用户都不会随便授予你通讯录权限。现在用户动不动收到诈骗短信，诈骗电话，谁知道是不是你们这种不靠谱的公司泄露出去的。</p>
+<p>即使是大公司，现在都不能让用户放心了，最近爆出的Facebook泄露用户个人信息很好的说明了问题。</p>
+<p>所以获取通讯录权限也比较难，通讯录权限和通知权限有些地方很像，如果用户决定了不授予你通讯录权限，你之后再想获取到这些权限就比较难。所以对于通讯录权限来说，通过pre-permission的方式来获取也比较好。</p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/Mt6vzP6wJRA3yECWP9qt.png" alt="img"></p>
+<p>对于其他权限的来说，如果你想更加充分的向用户去说明也是可以用的，这里就不再多说。</p>
+<p><strong>（5）在Android中怎么设计</strong></p>
+<p>Android中的弹窗都不能添加说明文字，是不是就应该都添加pre-permission呢？</p>
+<p>实际上不是。</p>
+<p>首先在之前我们说到过，Android中的系统授权框可以不止一次的弹出来（下次进入应用时），所以用户再次授权成本更低。</p>
+<p>其次，大部分的授权我们也提到过，像：相机、相册、定位这种，用户已经被各种应用教育的非常好了，基本都会给你权限，不给的话相关功能也用不了。</p>
+<p>所以实际上在Android中和iOS中情况差不多，主要针对通知和通讯录权限来使用pre-permission，但是Android中通知权限不用通过用户授权，所以我们只要在申请通讯录权限的时候加上pre-permission即可。</p>
+<p><strong>3.拒绝后怎么办？</strong></p>
+<p><strong>（1）pre-permission被拒</strong></p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/Yqzq93wnAJUpWa1hP9IE.png" alt="img"></p>
+<p>添加了pre-permisson也不是万能的，也会被用户拒绝。</p>
+<p>而通知和通讯录权限，不像定位，相机权限，可以在用户进入相关页面时提示功能不能用。</p>
+<p>若要使用相关功能就得打开权限，对于这种情况我们怎么办呢？</p>
+<p>拿通知举例，我们就要在用户需要被提醒的时候，来提醒用户打开通知。如果用户真的需要被通知，那么自然会授予我们权限。</p>
+<p>如果是通讯录呢？</p>
+<p>那就在添加好友的时候提醒，要注意的是这种提示不是用弹窗的方式，这样有骚扰用户的嫌疑。</p>
+<p><strong>（2）网络授权框被拒</strong></p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/uyDGrofVI3J8EcVSfhVv.png" alt="img"></p>
+<p>用户关闭了网络授权后，系统会在下一次用户进入应用时，自动弹出已经关闭网络权限的提示框，应用只需按照断网情况处理即可。</p>
+<p>西瓜视频在断网后为用户分析了不同的可能性，并且在检查网络权限这里添加了设置按钮。用户可以很方便的检查网络是否关闭，这样的设计可以说是非常棒了，大多数的应用在断网后的设计都没有这么细致。</p>
+<p><strong>（3）系统授权框被拒</strong></p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/oc5yzxsnMWsEl3WPFX4q.png" alt="img"></p>
+<p>在用户拒绝我们后，立即提示用户若要使用相关功能就得打开相关权限，并且在该权限的每个触发点都加入弹窗提示，同时给用户一个去设置的按钮。这里要注意的是，用户点击去设置后，要直接将用户送到应用的授权界面，不要让用户去找。</p>
+<p>提示的方式有两种：有弹窗提示、也有整页提示。</p>
+<p>如果你需要授权的功能，不需要占用整个页面就用弹窗提示，如果该功能需要占用整个页面，那么就用整页提示。</p>
+<p><strong>4. 提示文案</strong></p>
+<p>首先，iOS中网络授权框和通知授权框中的文字是固定的，不能自定义。</p>
+<p><strong>（1）pre-permission中的文案</strong></p>
+<p>由于pre-permission的优势，我们可以充分的向用户说明：</p>
+<ol>
+<li>结合图片文字的方式说清楚我们要获取这个权限做什么用？</li>
+<li>如果你不给我们权限会怎样？</li>
+<li>打消用户的疑虑，如果是通讯录权限就说明白我们不会侵犯你的隐私，您可以随时关闭该权限；如果是通知权限就说明白我们不会骚扰你，前面给出的VUE的预授权弹窗中，就专门强调了不会打扰用户，这点很好。</li>
+</ol>
+<p><strong>（2）第一次iOS系统授权提示框出现时的文案</strong></p>
+<p><img src="http://image.woshipm.com/wp-files/2018/03/bJv3CMzlo5twijO00VRT.png" alt="img"></p>
+<p>说明白，如果不给我们权限你将不能使用什么功能，个人认为“你不能做什么”这种方式要比“我要为你做什么更好”。</p>
+<p><strong>（3）被拒绝后提示框中的文案</strong></p>
+<p>您还尚未开启某权限，所以不能使用该功能，请开启权限。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这篇文章写得比较长，希望的是大家看完后不光知道怎么去设计App授权，更知道为什么这么设计，这样当遇到不同的情景的时候才能灵活处理。</p>
+<p><strong>最后我们以一个例子来收尾</strong></p>
+<p>假设我们的应用是一款小视频类软件。</p>
+<p><strong>第一步：</strong>找出所有应用中用到的权限，分为iOS需要的授权和Android需要的授权</p>
+<ul>
+<li>针对iOS：要用到的权限有网络、通知、相机、相册、麦克风、定位。</li>
+<li>针对Android：要用到的权限有相机、相册、麦克风、定位、存储权限。</li>
+</ul>
+<p><strong>第二步：</strong>针对每一个权限做设计</p>
+<p>接下来我们以iOS下的相机权限为例：</p>
+<p><strong>1）什么时候弹出？</strong></p>
+<p>用户点击录制视频时弹出。</p>
+<p><strong>2）要不要pre-permission?</strong></p>
+<p>不要，所需权限与场景关联性很强，利用系统提示框中的自定义文字即可。</p>
+<p><strong>3）如果用户拒绝了怎么办？</strong></p>
+<p>点击拒绝后和下次进入时，利用整页去提示用户，并添加去设置按钮。</p>
+<p><strong>文案</strong>：（简单示范，大家可以写的更好一点）</p>
+<ul>
+<li>第一次请求用户授权时：如果不授予相机权限，您将不能拍摄视屏。</li>
+<li>拒绝后提示用户时：由于您还未授予相机权限，暂时不能录制视频，请开启权限。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/用户分析/" rel="tag"># 用户分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/22/20181123-基于场景谈产品/" rel="next" title="基于场景谈产品">
+                <i class="fa fa-chevron-left"></i> 基于场景谈产品
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/17/20181217-App的加载设计/" rel="prev" title="App的加载设计">
+                App的加载设计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Fennec</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、认识授权"><span class="nav-number">1.</span> <span class="nav-text">一、认识授权</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-什么是授权"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 什么是授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-需要用户授权的权限有哪些"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 需要用户授权的权限有哪些</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#１-3-常用授权"><span class="nav-number">1.3.</span> <span class="nav-text">１.3 常用授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-iOS和Android在设计授权时的区别"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 iOS和Android在设计授权时的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-为什么要让用户给我们授权"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 为什么要让用户给我们授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-用户授权过程中存在的问题"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 用户授权过程中存在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、如何针对授权做设计"><span class="nav-number">2.</span> <span class="nav-text">二、如何针对授权做设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：确定应用中需要用到哪些权限"><span class="nav-number">2.1.</span> <span class="nav-text">第一步：确定应用中需要用到哪些权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：针对每一个权限做下列设计"><span class="nav-number">2.2.</span> <span class="nav-text">第二步：针对每一个权限做下列设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fennec</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
